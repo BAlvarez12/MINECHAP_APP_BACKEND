@@ -4,7 +4,13 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
-const serviceAccount = require('./clave.json');
+const serviceAccount = JSON.parse(
+    Buffer.from(process.env.SERVICE_ACCOUNT_KEY, "base64").toString("utf8")
+  );
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+  });
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
