@@ -2,7 +2,8 @@ const admin = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = 3000;
+
+const PORT = process.env.PORT || 3000;
 
 const serviceAccount = JSON.parse(
   Buffer.from(process.env.FIREBASE_CREDENTIALS, "base64").toString("utf8")
