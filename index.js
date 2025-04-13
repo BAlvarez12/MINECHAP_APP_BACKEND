@@ -5,16 +5,14 @@ const app = express();
 const PORT = 3000;
 
 const serviceAccount = JSON.parse(
-    Buffer.from(process.env.FIREBASE_CREDENTIALS, "base64").toString("utf8")
-  );
+  Buffer.from(process.env.FIREBASE_CREDENTIALS, "base64").toString("utf8")
+);
 
+if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+}
 
 app.use(bodyParser.json());
 
@@ -23,11 +21,11 @@ app.post('/enviarNotificacion', async (req, res) => {
 
   const payload = {
     data: {
-      titulo: titulo,
+      titulo,
       contenido: mensaje,
-      chatId: chatId,
+      chatId,
     },
-    token: token,
+    token,
   };
 
   try {
