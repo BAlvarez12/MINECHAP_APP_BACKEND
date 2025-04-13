@@ -5,7 +5,7 @@ const app = express();
 const PORT = 3000;
 
 const serviceAccount = JSON.parse(
-    Buffer.from(process.env.SERVICE_ACCOUNT_KEY, "base64").toString("utf8")
+    Buffer.from(process.env.FIREBASE_CREDENTIALS, "base64").toString("utf8")
   );
 
   admin.initializeApp({
